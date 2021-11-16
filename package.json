@@ -1,0 +1,23 @@
+{
+  "name": "watchit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nagysandordominik/watchIT.git"
+  },
+  "keywords": [],
+  "author": "Nagy Sándor Dominik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nagysandordominik/watchIT/issues"
+  },
+  "homepage": "https://github.com/nagysandordominik/watchIT#readme",
+  "bin": {
+    "watchit": "index.js"
+  }
+}
