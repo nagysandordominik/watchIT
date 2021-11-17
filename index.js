@@ -3,21 +3,29 @@
 const debounce = require('lodash.debounce');
 const chokidar = require('chokidar');
 const program = require('caporal');
+const fs = require('fs');
 
 program
     .version('0.0.1')
-    .argument('[filename', 'Name of a file to execute')
-    .action(args => {
-        console.log(argv);
-    })
+    .argument('[filename]', 'Name of a file to execute')
+    .action(async ({filename}) => {
+        const name = filename || 'index.js';
+        
+        try{
+            await fs.promises.access(name);
+        }   catch (err) {
+            throw new Error(`Did not find ${name}`)
+        }
 
-const start = debounce (() => {
-    console.log('Starting users program');
-
-}, 100);
+        const start = debounce (() => {
+            console.log('Starting users program'); 
+        }, 100);
 
 chokidar
     .watch('.')
     .on('add', start)
-    .on('change', () => console.log('File changed'))
-    .on('unlink', () => console.log('File unlinked'))
+    .on('change', start)
+    .on('unlink', start);
+    });
+
+program.parse(process.argv);
