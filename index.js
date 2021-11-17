@@ -26,7 +26,7 @@ program
             }
             console.log(chalk.red('>Starting process<')) 
             proc =  spawn('node', [name], {stdio:'inherit'});
-        }, 100);
+        }, 200);
 
 chokidar
     .watch('.')
