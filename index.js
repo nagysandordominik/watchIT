@@ -5,6 +5,7 @@ const chokidar = require('chokidar');
 const program = require('caporal');
 const fs = require('fs');
 const { spawn } = require('child_process');
+const chalk = require('chalk')
 
 program
     .version('0.0.1')
@@ -15,11 +16,16 @@ program
         try{
             await fs.promises.access(name);
         }   catch (err) {
-            throw new Error(`Did not find ${name}`)
+            throw new Error(`Did not find ${name}`);
         }
 
+        let proc;
         const start = debounce (() => {
-            spawn('node', [name], {stdio:'inherit'});
+            if (proc) {
+                proc.kill();
+            }
+            console.log(chalk.red('>Starting process<')) 
+            proc =  spawn('node', [name], {stdio:'inherit'});
         }, 100);
 
 chokidar
