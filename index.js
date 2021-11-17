@@ -4,11 +4,12 @@ const debounce = require('lodash.debounce');
 const chokidar = require('chokidar');
 const program = require('caporal');
 const fs = require('fs');
+const { spawn } = require('child_process');
 
 program
     .version('0.0.1')
     .argument('[filename]', 'Name of a file to execute')
-    .action(async ({filename}) => {
+    .action(async ({ filename }) => {
         const name = filename || 'index.js';
         
         try{
@@ -18,7 +19,7 @@ program
         }
 
         const start = debounce (() => {
-            console.log('Starting users program'); 
+            spawn('node', [name], {stdio:'inherit'});
         }, 100);
 
 chokidar
